@@ -1,6 +1,9 @@
 let circles = [];
 let balloon;
 let inScene1 = true;
+let inScene2 = true;
+let angle = 0;
+let radius = 0;
 
 function setup(){
   createCanvas(900,900);
@@ -55,6 +58,22 @@ function draw(){
       endShape();
     }
   }
+  radius += 1;
+  angle += 0.1;
+
+
+  let xPos = width/2 + radius * cos(angle);
+  let yPos = height/2 + radius * sin(angle);
+
+  stroke(random(255),random(255),random(255));
+  strokeWeight(2);
+
+  point(xPos, yPos);
+
+  
+  
+
+
   
   // //researching more about what noise() does, i tried to look online for "fluid shapes to make in p5.js"
   // stroke(0);
