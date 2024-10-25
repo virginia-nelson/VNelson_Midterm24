@@ -12,13 +12,14 @@ function draw(){
   print(inScene1);
   background(220);
 
-  let x = random(width);
-  let y = random(height);
+  let x = random(width); //random width for circle
+  let y = random(height); //random height for circle
 
-  let size = 0;
-  let growthRate = random(1,3);
+  let size = 0; //size initally starts at 0
+  let growthRate = random(1,3); //there's a growth rate value using a random number between 1 and 3
+  
+  let circleColor = color(random(255), random(255), random(255), 150); //generating a random color for the circles
 
-  let circleColor = color(random(255), random(255), random(255), 150);
  
   while (inScene1){
     print(balloon);
@@ -32,10 +33,10 @@ function draw(){
     }
   }
 
-  circles.push([x,y,size,growthRate,circleColor]);
-  for(let i = circles.length-1; i >= 0; i--){
-    let circle = circles[i];
-    fill(circle[4]);
+  circles.push([x,y,size,growthRate,circleColor]); //adding into circles all my declared variables above
+  for(let i = circles.length-1; i >= 0; i--){ //going through the array backwards
+    let circle = circles[i]; //adding indexed value into a new variable, circle
+    fill(circle[4]); //filling the circle using a random color from above
     noStroke;
     ellipse(circle[0],circle[1],circle[2]); 
 
