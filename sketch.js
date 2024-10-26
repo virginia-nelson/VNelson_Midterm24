@@ -4,6 +4,28 @@ let inScene1 = true;
 let inScene2 = true;
 let angle = 0;
 let radius = 0;
+let particles = [];
+
+class Particle{//to make a new particle object (this is for my second scene)
+  constructor(x,y){
+    this.x = x; //starting x position
+    this.y = y; //starting y position
+
+    this.color = color(random(255), random(255), random(255));//produces a random color
+    this.velocity = createVector(random(-1,1),random(-1,1));//produces a random vector location
+  }
+
+  update(){
+    this.x += this.velocity; //updates x position
+    this.y += this.velocity; //updates y position
+  }
+
+  display(){
+    fill(this.color);//draw the particle color
+    noStroke();
+    ellipse(this.x,this.y,40,40);
+  }
+}
 
 function setup(){
   createCanvas(900,900);
@@ -47,7 +69,6 @@ function draw(){
           circles.splice(i,1);
         }
       }
-      
         //researching more about what noise() does, i tried to look online for "fluid shapes to make in p5.js"
       stroke(0);
       beginShape();
@@ -55,36 +76,11 @@ function draw(){
         let y = noise(x * 0.01, frameCount * 0.01) * height;
         vertex(x, y);
       }
-      endShape();
-    }
+    endShape();
+    } 
   }
-  radius += 1;
-  angle += 0.1;
-
-
-  let xPos = width/2 + radius * cos(angle);
-  let yPos = height/2 + radius * sin(angle);
-
-  stroke(random(255),random(255),random(255));
-  strokeWeight(2);
-
-  point(xPos, yPos);
-
-  
-  
-
-
-  
-  // //researching more about what noise() does, i tried to look online for "fluid shapes to make in p5.js"
-  // stroke(0);
-  // beginShape();
-  // for (let x = 0; x < width; x++) {
-  //   let y = noise(x * 0.01, frameCount * 0.01) * height;
-  //   vertex(x, y);
-  // }
-  //  endShape();
-    
 }
+
 
 
 
