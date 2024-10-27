@@ -26,7 +26,7 @@ class Particle{//to make a new particle object (this is for my second scene)
     }
 
     if(this.y < 0 || this.y > height){//if the y value goes off the height of the screen
-      this.velocity.y *= -1;//reverse the y value so it goes in the opposite direction
+      this.velocity.y *= -1;//reverse the y value so it goes in the opposite direction=
     }
   }
 
@@ -63,6 +63,7 @@ function draw(){
 
     if(balloon < 0){
         inScene1 = false;
+        inScene2 = true;
         balloon = height;
     }
     else{
@@ -107,11 +108,14 @@ function draw(){
       p.display();
     }
 
-    if(frameCount > 300){
-      inScene2 = false;
-      inScene3 = true;
-      particles = [];
-    }
+    // if(frameCount > 300){
+    //   inScene2 = false;
+    //   // inScene3 = true;
+    //   particles = [];
+    // }
+  }
+  else if(inScene3){
+    background(255);
   }
 }
 
