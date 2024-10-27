@@ -107,12 +107,19 @@ function draw(){
       p.update();
       p.display();
     }
+    
+    fill(255);
+    noStroke();
+    rect(width/2, balloon, 100, 100);
+    balloon -= 2;
 
-    // if(frameCount > 300){
-    //   inScene2 = false;
-    //   // inScene3 = true;
-    //   particles = [];
-    // }
+    if(balloon < 0){
+        inScene2 = false;
+        inScene3 = true;
+        balloon = height;
+    }
+
+    
   }
   else if(inScene3){
     background(255);
