@@ -12,7 +12,7 @@ class Particle{//to make a new particle object (this is for my second scene)
     this.y = y; //starting y position
 
     this.color = color(random(255), random(255), random(255));//produces a random color
-    this.velocity = createVector(random(-1,1),random(-1,1));//produces a random vector location
+    this.velocity = createVector(random(-5,5),random(-5,5));//produces a random vector location
   }
 
   update(){//updating each particle position
@@ -27,6 +27,7 @@ class Particle{//to make a new particle object (this is for my second scene)
   }
 }
 
+
 function setup(){
   createCanvas(900,900);
   balloon = height;
@@ -36,6 +37,12 @@ function setup(){
 function draw(){
   print(inScene1);
   background(220);
+
+  if(inScene1){
+    backColor = color(random(255),random(255), random(255));
+  }
+
+  background(backColor);
 
  
   if(inScene1){
@@ -61,26 +68,27 @@ function draw(){
       for(let i = circles.length-1; i >= 0; i--){ //going through the array backwards
         let circle = circles[i]; //adding indexed value into a new variable, circle
         fill(circle[4]); //filling the circle using a random color from above
-        noStroke();
-        ellipse(circle[0],circle[1],circle[2]); 
+        noStroke();//no outline
+        ellipse(circle[0],circle[1],circle[2]);//creating an ellipse at the x,y location with the size inputed from array
 
-        circle[2] += circle[3];
-        if (circle[2] > 200){
-          circles.splice(i,1);
+        circle[2] += circle[3];//updating the size based on the growthrate
+        if (circle[2] > 200){//if the size gets bigger than 200..
+          circles.splice(i,1);//cut it off and make it disappear
         }
       }
         //researching more about what noise() does, i tried to look online for "fluid shapes to make in p5.js"
-      stroke(0);
-      beginShape();
-      for (let x = 0; x < width; x++) {
-        let y = noise(x * 0.01, frameCount * 0.01) * height;
+      stroke(0);//white outline
+      beginShape();//start the shape
+      for (let x = 0; x < width; x++) {//expand from the width of the screen
+        let y = noise(x * 0.01, frameCount * 0.01) * height;//noise creates a wave pattern
         vertex(x, y);
       }
     endShape();
     } 
   }
   else{
-    if (frameCount % 1 === 0) { //a new particle will be added every 15 frames
+    background(backColor);
+    if (frameCount % 1 === 0) { //a new particle will be added every 1 frames
       particles.push(new Particle(mouseX, mouseY)); 
     }
   
