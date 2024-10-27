@@ -80,8 +80,8 @@ function draw(){
     } 
   }
   else{
-    if (frameCount % 2 === 0) { //a new particle will be added every 15 frames
-      particles.push(new Particle(width/2,height/2)); 
+    if (frameCount % 1 === 0) { //a new particle will be added every 15 frames
+      particles.push(new Particle(mouseX, mouseY)); 
     }
   
     for (let p of particles) {
