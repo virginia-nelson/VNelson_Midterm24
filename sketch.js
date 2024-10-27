@@ -6,6 +6,7 @@ let inScene3 = false;
 let angle = 0;
 let radius = 0; 
 let particles = []; //to use for my particles
+let spiralPoints = [];
 
 class Particle{//to make a new particle object (this is for my second scene)
   constructor(x,y){
@@ -56,7 +57,7 @@ function draw(){
 
  
   if(inScene1){
-    fill(255);
+    fill(255,47);
     noStroke();
     rect(width/2, balloon, 100, 100);
     balloon -= 2;
@@ -108,21 +109,40 @@ function draw(){
       p.display();
     }
     
-    fill(255);
+    fill(255,17);
     noStroke();
     rect(width/2, balloon, 100, 100);
-    balloon -= 2;
+    balloon -= 1;
 
     if(balloon < 0){
         inScene2 = false;
         inScene3 = true;
         balloon = height;
     }
-
     
   }
   else if(inScene3){
     background(255);
+    translate(width/2,height/2);
+
+    let xPoint = radius * cos(angle);
+    let yPoint = radius * sin(angle);
+
+    spiralPoints.push(createVector(xPoint,yPoint));
+    angle += 0.5;
+    radius += 0.5;
+
+    for(let i =0; i< spiralPoints.length; i++){
+      let point = spiralPoints[i];
+      strokeWeight(map(i,0,spiralPoints.length,1,50));
+      stroke(random(255),random(255),random(255));
+      ellipse(point.x,point.y,5,5);
+    }
+
+    if(spiralPoints.length > 1000){
+      spiralPoints.splice(0,1);
+    }
+
   }
 }
 
