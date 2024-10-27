@@ -1,7 +1,8 @@
 let circles = [];
 let balloon;
 let inScene1 = true;
-let inScene2 = true;
+let inScene2 = false;
+let inScene3 = false;
 let angle = 0;
 let radius = 0; 
 let particles = []; //to use for my particles
@@ -47,7 +48,7 @@ function draw(){
   print(inScene1);
   background(220);
 
-  if(inScene1){
+  if(inScene1){//scene 1 is random bubbles and waves
     backColor = color(random(255),random(255), random(255));
   }
 
@@ -85,7 +86,7 @@ function draw(){
           circles.splice(i,1);//cut it off and make it disappear
         }
       }
-        //researching more about what noise() does, i tried to look online for "fluid shapes to make in p5.js"
+      //researching more about what noise() does, i tried to look online for "fluid shapes to make in p5.js"
       stroke(0);//white outline
       beginShape();//start the shape
       for (let x = 0; x < width; x++) {//expand from the width of the screen
@@ -95,7 +96,7 @@ function draw(){
     endShape();
     } 
   }
-  else{
+  else if(inScene2){ //scene 2 is particles following the mouse
     background(backColor);
     if (frameCount % 1 === 0) { //a new particle will be added every 1 frames
       particles.push(new Particle(mouseX, mouseY)); 
@@ -104,6 +105,12 @@ function draw(){
     for (let p of particles) {
       p.update();
       p.display();
+    }
+
+    if(frameCount > 300){
+      inScene2 = false;
+      inScene3 = true;
+      particles = [];
     }
   }
 }
