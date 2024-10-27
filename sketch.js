@@ -3,8 +3,8 @@ let balloon;
 let inScene1 = true;
 let inScene2 = true;
 let angle = 0;
-let radius = 0;
-let particles = [];
+let radius = 0; 
+let particles = []; //to use for my particles
 
 class Particle{//to make a new particle object (this is for my second scene)
   constructor(x,y){
@@ -15,15 +15,15 @@ class Particle{//to make a new particle object (this is for my second scene)
     this.velocity = createVector(random(-1,1),random(-1,1));//produces a random vector location
   }
 
-  update(){
-    this.x += this.velocity; //updates x position
-    this.y += this.velocity; //updates y position
+  update(){//updating each particle position
+    this.x += this.velocity.x; //updates x position
+    this.y += this.velocity.y; //updates y position
   }
 
-  display(){
+  display(){//displaying my particles
     fill(this.color);//draw the particle color
-    noStroke();
-    ellipse(this.x,this.y,40,40);
+    noStroke();//no outline
+    ellipse(this.x,this.y,40,40);//draw the ellipse at the x and y position
   }
 }
 
@@ -78,6 +78,16 @@ function draw(){
       }
     endShape();
     } 
+  }
+  else{
+    if (frameCount % 15 === 0) { //a new particle will be added every 15 frames
+      particles.push(new Particle(width/2,height/2)); 
+    }
+  
+    for (let p of particles) {
+      p.update();
+      p.display();
+    }
   }
 }
 
