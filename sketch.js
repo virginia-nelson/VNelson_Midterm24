@@ -9,11 +9,12 @@ let particles = []; //SCENE2 array to use for my particles
 let spiralPoints = [];//SCENE3 holds the points for spiral
 
 class Particle{//to make a new particle object (this is for my second scene)
-  constructor(x,y){
+  constructor(x,y, isEccentric = true){
     this.x = x; //starting x position
     this.y = y; //starting y position
+    this.isEccentric = isEccentric;
 
-    this.color = color(random(255), random(255), random(255));//produces a random color
+    // this.color = color(255);//produces a random color
     this.velocity = createVector(random(-5,5),random(-5,5));//produces a random vector location
   }
 
@@ -32,8 +33,13 @@ class Particle{//to make a new particle object (this is for my second scene)
   }
 
   display(){//displaying my particles
-    fill(this.color);//draw the particle color
     noStroke();//no outline
+    if(this.isEccentric){
+      fill(random(255),random(255),random(255));
+    }
+    else{
+      fill(100);
+    }
     ellipse(this.x,this.y,40,40);//draw the ellipse at the x and y position
   }
 }
@@ -75,9 +81,9 @@ function draw(){//drawing loop that will repeat
   
       let circleColor = color(random(255), random(255), random(255), 150); //generating a random color for the circles
 
-      circles.push([x,y,size,growthRate,circleColor]); //adding into circles all my declared variables above
+      circles.push([x,y,size,growthRate,circleColor]); //this is a 2D array. each circle's elements is an array
       for(let i = circles.length-1; i >= 0; i--){ //going through the array backwards
-        let circle = circles[i]; //adding indexed value into a new variable, circle
+        let circle = circles[i]; //adding indexed value into a new variable, circle. this is accessing a whole array inside an array
         fill(circle[4]); //filling the circle using a random color from above
         noStroke();//no outline
         ellipse(circle[0],circle[1],circle[2]);//creating an ellipse at the x,y location with the size inputed from array
@@ -101,7 +107,7 @@ function draw(){//drawing loop that will repeat
     } 
   }
   else if(inScene2){ //scene 2 is particles following the mouse
-    background(backColor);//sets random background color, just once so its solid the whole time
+    background(0);//sets random background color, just once so its solid the whole time
     if (frameCount % 1 === 0) { //a new particle will be added every 1 frames
       particles.push(new Particle(mouseX, mouseY));//pushes into the array the mouseX and mouseY. this makes it follow the mouse
     }
@@ -115,6 +121,8 @@ function draw(){//drawing loop that will repeat
     noStroke();//no outline
     rect(width/2, balloon, 100, 100);//creates the rectangle
     balloon -= 1;//decreases the height to make it float at a smaller rate (decreasing y value by 1 each time)
+
+
 
     if(balloon < 0){//if the balloon reaches past the top of the screen
         inScene2 = false;//scene2 is now over
@@ -148,6 +156,10 @@ function draw(){//drawing loop that will repeat
 
   }
 }
+
+//FEEDBACK
+//different shapes, more irregular shapes, more chaotic/layers, plain layers and one standing out
+//second scene: different shapes? one going too fast? play with 1 being different than the others to empahsize differences
 
 
 
