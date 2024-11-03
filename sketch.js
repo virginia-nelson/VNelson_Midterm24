@@ -9,7 +9,7 @@ let particles = []; //SCENE2 array to use for my particles
 let spiralPoints = [];//SCENE3 holds the points for spiral
 
 class Particle{//to make a new particle object (this is for my second scene)
-  constructor(x,y, isEccentric = true){
+  constructor(x,y, isEccentric = false){
     this.x = x; //starting x position
     this.y = y; //starting y position
     this.isEccentric = isEccentric;
@@ -19,16 +19,29 @@ class Particle{//to make a new particle object (this is for my second scene)
   }
 
   update(){//updating each particle position
-    this.x += this.velocity.x; //updates x position
-    this.y += this.velocity.y; //updates y position
+    if(this.isEccentric){
+      this.x += this.velocity.x + 5;
+      this.y += this.velocity.y + 5;
+    }
+    else{
+      this.x += this.velocity.x; //updates x position
+      this.y += this.velocity.y; //updates y position
+    }
     
     //adding bounds to the dots so they dont come off the screen
     if(this.x < 0 || this.x > width){//if x value goes off the width of the screen
       this.velocity.x *= -1;//reverse the x value so it goes in the opposite direction
+
+      if(this.isEccentric){
+        this.x = constrain(this.x,0,width);
+      }
     }
 
     if(this.y < 0 || this.y > height){//if the y value goes off the height of the screen
       this.velocity.y *= -1;//reverse the y value so it goes in the opposite direction=
+    }
+    if(this.isEccentric){
+      this.y = constrain(this.x,0,height);
     }
   }
 
@@ -109,7 +122,8 @@ function draw(){//drawing loop that will repeat
   else if(inScene2){ //scene 2 is particles following the mouse
     background(0);//sets random background color, just once so its solid the whole time
     if (frameCount % 1 === 0) { //a new particle will be added every 1 frames
-      particles.push(new Particle(mouseX, mouseY));//pushes into the array the mouseX and mouseY. this makes it follow the mouse
+      let isEccentric = particles.length === 0;//
+      particles.push(new Particle(mouseX, mouseY,isEccentric));//pushes into the array the mouseX and mouseY. this makes it follow the mouse
     }
   
     for (let p of particles) {//goes through the array. for every value (p) in the array particles...
