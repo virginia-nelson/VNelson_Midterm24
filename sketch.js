@@ -19,14 +19,9 @@ class Particle{//to make a new particle object (this is for my second scene)
   }
 
   update(){//updating each particle position
-    if(this.isEccentric){
-      this.x += this.velocity.x + 5;
-      this.y += this.velocity.y + 5;
-    }
-    else{
-      this.x += this.velocity.x; //updates x position
-      this.y += this.velocity.y; //updates y position
-    }
+    this.x += this.velocity.x; //updates x position
+    this.y += this.velocity.y; //updates y position
+    
     
 
     if(this.isEccentric){
@@ -40,6 +35,11 @@ class Particle{//to make a new particle object (this is for my second scene)
       if(this.y === 0 || this.y === height){//if the y value goes off the height of the screen
         this.velocity.y *= -1;//reverse the y value so it goes in the opposite direction=
       }
+
+      if (random() < 0.1) { // 10% chance to change velocity each frame
+        this.velocity.x = random(-10, 10); // New random x velocity
+        this.velocity.y = random(-10, 10); // New random y velocity
+    }
 
     }
     else{
