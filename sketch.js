@@ -41,7 +41,7 @@ class Particle{//to make a new particle object (this is for my second scene)
       this.velocity.y *= -1;//reverse the y value so it goes in the opposite direction=
     }
     if(this.isEccentric){
-      this.y = constrain(this.x,0,height);
+      this.y = constrain(this.y,0,height);
     }
   }
 
