@@ -28,20 +28,30 @@ class Particle{//to make a new particle object (this is for my second scene)
       this.y += this.velocity.y; //updates y position
     }
     
-    //adding bounds to the dots so they dont come off the screen
-    if(this.x < 0 || this.x > width){//if x value goes off the width of the screen
-      this.velocity.x *= -1;//reverse the x value so it goes in the opposite direction
 
-      if(this.isEccentric){
-        this.x = constrain(this.x,0,width);
-      }
-    }
-
-    if(this.y < 0 || this.y > height){//if the y value goes off the height of the screen
-      this.velocity.y *= -1;//reverse the y value so it goes in the opposite direction=
-    }
     if(this.isEccentric){
+      this.x = constrain(this.x,0,width);
       this.y = constrain(this.y,0,height);
+
+      if(this.x === 0 || this.x === width){//if x value goes off the width of the screen
+        this.velocity.x *= -1;//reverse the x value so it goes in the opposite direction
+      }
+
+      if(this.y === 0 || this.y === height){//if the y value goes off the height of the screen
+        this.velocity.y *= -1;//reverse the y value so it goes in the opposite direction=
+      }
+
+    }
+    else{
+      if(this.x < 0 || this.x > width){//if x value goes off the width of the screen
+        this.velocity.x *= -1;//reverse the x value so it goes in the opposite direction
+        this.x = constrain(this.x, 0, width);
+      }
+
+      if(this.y < 0 || this.y > height){//if the y value goes off the height of the screen
+        this.velocity.y *= -1;//reverse the y value so it goes in the opposite direction
+        this.y = constrain(this.y, 0, height);
+      }
     }
   }
 
