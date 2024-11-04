@@ -25,8 +25,8 @@ class Particle{//to make a new particle object (this is for my second scene)
     
 
     if(this.isEccentric){
-      this.x = constrain(this.x,0,width);
-      this.y = constrain(this.y,0,height);
+      this.x = constrain(this.x,0,width); //constrain takes (a value, min, max) limit. setting the bounds for x location
+      this.y = constrain(this.y,0,height); //setting the bounds for y using 0 and the height
 
       if(this.x === 0 || this.x === width){//if x value goes off the width of the screen
         this.velocity.x *= -1;//reverse the x value so it goes in the opposite direction
@@ -45,23 +45,23 @@ class Particle{//to make a new particle object (this is for my second scene)
     else{
       if(this.x < 0 || this.x > width){//if x value goes off the width of the screen
         this.velocity.x *= -1;//reverse the x value so it goes in the opposite direction
-        this.x = constrain(this.x, 0, width);
+        this.x = constrain(this.x, 0, width);//constrains the x value to stay inside of the screen
       }
 
       if(this.y < 0 || this.y > height){//if the y value goes off the height of the screen
         this.velocity.y *= -1;//reverse the y value so it goes in the opposite direction
-        this.y = constrain(this.y, 0, height);
+        this.y = constrain(this.y, 0, height);//constrains the y valuye to stay witin the height of screen
       }
     }
   }
 
   display(){//displaying my particles
     noStroke();//no outline
-    if(this.isEccentric){
-      fill(random(255),random(255),random(255));
+    if(this.isEccentric){//if eccentric is true..
+      fill(random(255),random(255),random(255));//fill the color with random colors
     }
-    else{
-      fill(100);
+    else{//if eccentric is false
+      fill(100);//make generic circles come out in a greyish color
     }
     ellipse(this.x,this.y,40,40);//draw the ellipse at the x and y position
   }
@@ -131,7 +131,7 @@ function draw(){//drawing loop that will repeat
   }
   else if(inScene2){ //scene 2 is particles following the mouse
     background(0);//sets random background color, just once so its solid the whole time
-    if (frameCount % 1 === 0) { //a new particle will be added every 1 frames
+    if (frameCount % 5 === 0) { //a new particle will be added every 1 frames
       let isEccentric = particles.length === 0;//
       particles.push(new Particle(mouseX, mouseY,isEccentric));//pushes into the array the mouseX and mouseY. this makes it follow the mouse
     }
