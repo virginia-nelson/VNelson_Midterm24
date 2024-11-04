@@ -37,8 +37,8 @@ class Particle{//to make a new particle object (this is for my second scene)
       }
 
       if (random() < 0.1) { // 10% chance to change velocity each frame
-        this.velocity.x = random(-10, 10); // New random x velocity
-        this.velocity.y = random(-10, 10); // New random y velocity
+        this.velocity.x = random(-20, 20); // New random x velocity
+        this.velocity.y = random(-20, 20); // New random y velocity
     }
 
     }
