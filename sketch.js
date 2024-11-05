@@ -37,8 +37,8 @@ class Particle{//to make a new particle object (this is for my second scene)
       }
 
       if (random() < 0.1) { // 10% chance to change velocity each frame
-        this.velocity.x = random(-20, 20); // New random x velocity
-        this.velocity.y = random(-20, 20); // New random y velocity
+        this.velocity.x = random(-50, 50); // New random x velocity
+        this.velocity.y = random(-50, 50); // New random y velocity
     }
 
     }
@@ -132,7 +132,8 @@ function draw(){//drawing loop that will repeat
   else if(inScene2){ //scene 2 is particles following the mouse
     background(0);//sets random background color, just once so its solid the whole time
     if (frameCount % 5 === 0) { //a new particle will be added every 1 frames
-      let isEccentric = particles.length === 0;//
+      let isEccentric = particles.length === 0;//sets Eccentric to true and sets it as the first value in the particles array
+    
       particles.push(new Particle(mouseX, mouseY,isEccentric));//pushes into the array the mouseX and mouseY. this makes it follow the mouse
     }
   
