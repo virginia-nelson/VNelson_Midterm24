@@ -110,9 +110,10 @@ function draw(){//drawing loop that will repeat
         fill(circle[4]); //filling the circle using a random color from above
         noStroke();//no outline
         ellipse(circle[0],circle[1],circle[2]);//creating an ellipse at the x,y location with the size inputed from array
+        rect(circle[0]+100,circle[1]+100,circle[2],circle[2]);
 
         circle[2] += circle[3];//updating the size based on the growthrate
-        if (circle[2] > 200){//if the size gets bigger than 200..
+        if (circle[2] > 150){//if the size gets bigger than 200..
           circles.splice(i,1);//cut it off and make it disappear
         }
       }
